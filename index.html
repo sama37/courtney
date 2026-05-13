@@ -62,17 +62,17 @@
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: 0 3rem;
-      padding-top: 5rem;
+      justify-content: center;
+      padding: 7rem 3rem 5rem;
       gap: 3rem;
       position: relative;
       overflow: hidden;
+      text-align: center;
     }
 
-    /* animated background blobs */
     .hero::before {
       content: '';
       position: absolute;
@@ -99,7 +99,10 @@
       50%       { transform: translateY(-3%) scale(1.03); }
     }
 
-    .hero-text { position: relative; z-index: 1; animation: fadeUp 0.9s ease both; }
+    .hero-text { position: relative; z-index: 1; animation: fadeUp 0.9s ease both; max-width: 680px; width: 100%; }
+    .hero-bio { max-width: 520px; margin-left: auto; margin-right: auto; }
+    .hero-tags { justify-content: center; }
+    .hero-cta { justify-content: center; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -199,52 +202,52 @@
       transform: translateY(-2px);
     }
 
-    /* hero visual column */
+    /* hero visual — full-width centered card */
     .hero-visual {
       position: relative;
       z-index: 1;
       animation: fadeUp 0.9s 0.2s ease both;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      width: 80%;
+      max-width: 1000px;
     }
     .hero-card {
-      width: 340px;
-      height: 420px;
+      width: 100%;
+      height: auto;
       background: linear-gradient(145deg, var(--sky-light) 0%, var(--sky) 100%);
       border-radius: 2rem;
       position: relative;
       box-shadow: 0 30px 80px rgba(58,140,181,0.22), 0 8px 20px rgba(58,140,181,0.12);
       overflow: hidden;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 2rem;
+      flex-direction: row;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 2.5rem 3rem;
     }
     .hero-card::before {
       content: '';
       position: absolute;
-      top: -40px; right: -40px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.55) 0%, transparent 70%);
       border-radius: 50%;
+      pointer-events: none;
     }
     .avatar-placeholder {
-      position: absolute;
-      top: 1.8rem; left: 50%;
-      transform: translateX(-50%);
-      width: 130px; height: 130px;
+      flex-shrink: 0;
+      width: 100px; height: 100px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--sky-mid), var(--sky-deep));
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
+      font-size: 2.4rem;
       color: white;
       font-style: italic;
       box-shadow: 0 8px 30px rgba(58,140,181,0.4);
     }
+    .hero-card-info { text-align: left; flex: 1; }
     .hero-card-label {
       font-size: 0.72rem;
       letter-spacing: 0.12em;
@@ -255,7 +258,7 @@
     }
     .hero-card-name {
       font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: 700;
       color: var(--ink);
       margin-bottom: 0.3rem;
@@ -264,31 +267,27 @@
       font-size: 0.82rem;
       color: var(--gray);
     }
-    .floating-badge {
-      position: absolute;
-      top: 1.5rem; right: -1.5rem;
-      background: var(--white);
-      border-radius: 1rem;
-      padding: 0.6rem 1rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--ink);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      white-space: nowrap;
-      animation: float 6s ease-in-out infinite;
+    .hero-card-badges {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
     }
-    .floating-badge-2 {
-      position: absolute;
-      bottom: 3rem; left: -2rem;
-      background: var(--sky-deep);
-      border-radius: 1rem;
-      padding: 0.6rem 1rem;
+    .inline-badge {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      border-radius: 2rem;
       font-size: 0.75rem;
       font-weight: 500;
+    }
+    .inline-badge.light {
+      background: var(--white);
+      color: var(--ink);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .inline-badge.dark {
+      background: var(--sky-deep);
       color: white;
-      box-shadow: 0 4px 16px rgba(58,140,181,0.3);
-      white-space: nowrap;
-      animation: float 9s ease-in-out infinite;
     }
 
     /* ── WORK SECTION ── */
@@ -366,7 +365,6 @@
       min-height: 260px;
     }
 
-    /* coloured placeholder thumbs */
     .card-thumb { display: flex; align-items: center; justify-content: center; }
     .thumb-1 { background: linear-gradient(135deg, #B8DCEF 0%, #7BBDD9 100%); }
     .thumb-2 { background: linear-gradient(135deg, #D4E9F7 0%, #B8DCEF 100%); }
@@ -527,18 +525,11 @@
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { gap: 1.2rem; }
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 7rem 1.5rem 3rem;
-        text-align: center;
-      }
-      .hero-visual { order: -1; }
-      .hero-bio, .hero-tags, .hero-cta { justify-content: center; }
-      .hero-bio { max-width: 100%; }
-      .hero-card { width: 260px; height: 320px; }
-      .avatar-placeholder { width: 100px; height: 100px; font-size: 2.2rem; }
-      .floating-badge { display: none; }
-      .floating-badge-2 { display: none; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .hero-visual { width: 95%; }
+      .hero-card { flex-direction: column; text-align: center; padding: 2rem 1.5rem; gap: 1.2rem; }
+      .hero-card-info { text-align: center; }
+      .hero-card-badges { justify-content: center; }
       .section { padding: 4rem 1.5rem; }
       .projects-grid { grid-template-columns: 1fr; }
       .project-card.large,
@@ -556,7 +547,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo">Your Name</a>
+    <a href="index.html" class="nav-logo">Courtney Abele</a>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -570,7 +561,7 @@
       <span class="hero-eyebrow">Creative Advertising Portfolio</span>
       <h1>Ideas that<br><em>move people</em><br>& brands.</h1>
       <p class="hero-bio">
-        Hi, I'm <strong>[Your Name]</strong> — a creative advertising student passionate about storytelling, visual strategy, and campaigns that connect. Currently studying at <strong>[Your College]</strong>.
+        Hi I'm <strong>Courtney Abele</strong>, a creative advertising student passionate about storytelling, visual strategy, and campaigns that connect. Currently studying at <strong>Michigan State University</strong>.
       </p>
       <div class="hero-tags">
         <span class="tag">Social Media Strategy</span>
@@ -583,17 +574,6 @@
         <a href="mailto:you@email.com" class="btn-ghost">Say Hello</a>
       </div>
     </div>
-
-    <div class="hero-visual">
-      <div class="hero-card">
-        <div class="avatar-placeholder">Y</div>
-        <div class="floating-badge">✦ Open for Opportunities</div>
-        <div class="floating-badge-2">🎨 Class of '2X</div>
-        <p class="hero-card-label">Creative Advertising</p>
-        <p class="hero-card-name">[Your Name]</p>
-        <p class="hero-card-sub">[Your College] · [City, State]</p>
-      </div>
-    </div>
   </section>
 
   <!-- WORK -->
@@ -603,7 +583,6 @@
         <p class="section-label">Selected Work</p>
         <h2 class="section-title">Projects &<br>Campaigns</h2>
       </div>
-      <a href="#work" class="section-link">All projects →</a>
     </div>
 
     <div class="projects-grid">
@@ -656,17 +635,14 @@
     <h2 class="section-title">Skills &amp; Tools</h2>
     <div class="skills-grid">
       <div class="skill-card">
-        <span class="skill-icon">📱</span>
         <p class="skill-name">Social Media</p>
         <p class="skill-desc">Content strategy, platform-native creative, analytics, and community engagement across Instagram, TikTok, LinkedIn, and more.</p>
       </div>
       <div class="skill-card">
-        <span class="skill-icon">🎨</span>
         <p class="skill-name">Graphic Design</p>
         <p class="skill-desc">Adobe Creative Suite (Photoshop, Illustrator, InDesign), Canva, brand identity, typography, and visual storytelling.</p>
       </div>
       <div class="skill-card">
-        <span class="skill-icon">📊</span>
         <p class="skill-name">Pitch Decks</p>
         <p class="skill-desc">Crafting compelling presentations in PowerPoint, Keynote, and Google Slides that win rooms and communicate strategy clearly.</p>
       </div>
@@ -689,8 +665,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <span>© 2025 <a href="#">[Your Name]</a>. All rights reserved.</span>
-    <span>Designed &amp; built by me.</span>
+    <span>© 2026 <a href="#">Courtney Abele</a>. All rights reserved.</span>
   </footer>
 
 </body>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Title — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sky: #B8DCEF;
+      --sky-light: #E4F3FA;
+      --sky-mid: #7BBDD9;
+      --sky-deep: #3A8CB5;
+      --ink: #0D1F2D;
+      --mist: #F0F8FC;
+      --accent: #D4A35A;
+      --white: #FFFFFF;
+      --gray: #6B8491;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--mist);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(240,248,252,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(184,220,239,0.4);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--sky-deep);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--sky-deep); }
+
+    /* ── PROJECT HERO ── */
+    .project-hero {
+      padding-top: 8rem;
+      padding-bottom: 4rem;
+      padding-left: 3rem;
+      padding-right: 3rem;
+      max-width: 900px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--sky-deep);
+      letter-spacing: 0.05em;
+      margin-bottom: 2.5rem;
+      transition: gap 0.2s;
+    }
+    .back-link:hover { gap: 0.7rem; }
+
+    .project-category {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sky-deep);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .project-category::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1.5px;
+      background: var(--sky-mid);
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .project-title em { font-style: italic; color: var(--sky-deep); }
+
+    .project-tagline {
+      font-size: 1.1rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* meta pills */
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 0;
+    }
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 0.7rem 1.3rem;
+      background: var(--white);
+      border: 1px solid var(--sky);
+      border-radius: 0.9rem;
+      min-width: 110px;
+    }
+    .meta-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sky-deep);
+      font-weight: 500;
+    }
+    .meta-value {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ── HERO IMAGE ── */
+    .project-cover {
+      margin: 0 3rem;
+      border-radius: 1.8rem;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--sky-light) 0%, var(--sky) 60%, var(--sky-mid) 100%);
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(58,140,181,0.2);
+    }
+    .cover-placeholder {
+      text-align: center;
+      color: rgba(58,140,181,0.6);
+    }
+    .cover-placeholder p {
+      font-size: 0.85rem;
+      margin-top: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+    .cover-icon { font-size: 5rem; display: block; margin-bottom: 0.5rem; }
+
+    /* ── CONTENT BODY ── */
+    .project-body {
+      max-width: 780px;
+      margin: 5rem auto;
+      padding: 0 3rem;
+    }
+
+    .content-section { margin-bottom: 4rem; }
+
+    .content-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sky-deep);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .content-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--sky);
+    }
+
+    .content-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    .content-body p {
+      font-size: 0.98rem;
+      line-height: 1.85;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+    .content-body p:last-child { margin-bottom: 0; }
+
+    /* pull quote */
+    .pull-quote {
+      margin: 3rem 0;
+      padding: 2.5rem 2.5rem 2.5rem 2.8rem;
+      border-left: 3px solid var(--sky-deep);
+      background: var(--white);
+      border-radius: 0 1.2rem 1.2rem 0;
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    /* image block */
+    .image-block {
+      margin: 2.5rem 0;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--sky-light), var(--sky));
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(58,140,181,0.55);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .image-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .image-caption {
+      font-size: 0.78rem;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 0.7rem;
+      font-style: italic;
+    }
+
+    /* two-col images */
+    .image-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2.5rem 0;
+    }
+    .image-duo .image-block { margin: 0; min-height: 220px; }
+
+    /* outcomes / stats */
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .outcome-card {
+      background: var(--sky-deep);
+      border-radius: 1.2rem;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      color: white;
+    }
+    .outcome-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: white;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .outcome-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+
+    /* tools used */
+    .tools-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+    .tool-tag {
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      background: var(--sky-light);
+      color: var(--sky-deep);
+      border: 1px solid var(--sky);
+    }
+
+    /* ── NEXT PROJECT ── */
+    .next-project {
+      border-top: 1px solid var(--sky);
+      padding: 4rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.3s;
+    }
+    .next-project:hover {
+      background: var(--sky-light);
+    }
+    .next-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sky-deep);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .next-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .next-arrow {
+      font-size: 2.5rem;
+      color: var(--sky-deep);
+      transition: transform 0.3s;
+    }
+    .next-project:hover .next-arrow { transform: translateX(8px); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--sky);
+      padding: 1.8rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    footer a { color: var(--sky-deep); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .project-hero { padding: 7rem 1.5rem 3rem; }
+      .project-cover { margin: 0 1.5rem; min-height: 260px; }
+      .project-body { padding: 0 1.5rem; margin: 3rem auto; }
+      .outcomes-grid { grid-template-columns: 1fr 1fr; }
+      .image-duo { grid-template-columns: 1fr; }
+      .next-project { padding: 2.5rem 1.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Your Name</a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PROJECT HERO TEXT -->
+  <header class="project-hero">
+    <a href="index.html" class="back-link">← Back to All Work</a>
+    <p class="project-category">Social Media Campaign</p>
+    <h1 class="project-title">Project Title<br><em>Goes Here</em></h1>
+    <p class="project-tagline">
+      One or two sentences that describe what this project is about and why it matters. Keep it punchy — this is the hook.
+    </p>
+    <div class="project-meta">
+      <div class="meta-item">
+        <span class="meta-label">Year</span>
+        <span class="meta-value">2024</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Role</span>
+        <span class="meta-value">Art Director</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Type</span>
+        <span class="meta-value">Campaign</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Client / Class</span>
+        <span class="meta-value">[Brand or Course]</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- COVER IMAGE -->
+  <div class="project-cover">
+    <div class="cover-placeholder">
+      <!-- Replace this div with: <img src="your-cover-image.jpg" alt="Project cover"> -->
+      <span class="cover-icon">🖼️</span>
+      <p>Replace with your hero image or mockup</p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="project-body">
+
+    <!-- THE CHALLENGE -->
+    <section class="content-section">
+      <p class="content-label">The Challenge</p>
+      <h2 class="content-heading">What problem were you solving?</h2>
+      <div class="content-body">
+        <p>
+          Describe the brief, the challenge, or the opportunity you were given. Who was the client or brand? What were their goals? What problem existed in the market or for their audience?
+        </p>
+        <p>
+          Keep this grounded and specific. A good challenge statement makes the reader understand the stakes before they see your solution.
+        </p>
+      </div>
+    </section>
+
+    <!-- PULL QUOTE -->
+    <blockquote class="pull-quote">
+      <p>"A key insight, a defining creative principle, or a line from your brief that shaped everything you made."</p>
+    </blockquote>
+
+    <!-- THE APPROACH -->
+    <section class="content-section">
+      <p class="content-label">The Approach</p>
+      <h2 class="content-heading">How did you think through it?</h2>
+      <div class="content-body">
+        <p>
+          Walk through your creative process. What research or insights informed your strategy? How did you develop the concept? What decisions did you make and why?
+        </p>
+        <p>
+          This is where you show your thinking, not just your execution. Hiring managers and professors want to understand how you got to the answer.
+        </p>
+      </div>
+    </section>
+
+    <!-- SINGLE IMAGE -->
+    <div class="image-block">
+      <!-- Replace content with: <img src="your-process-image.jpg" alt="Description"> -->
+      Add an image — mood board, sketches, wireframes, early concepts
+    </div>
+    <p class="image-caption">Caption: What is shown in this image and why it matters.</p>
+
+    <!-- CREATIVE EXECUTION -->
+    <section class="content-section">
+      <p class="content-label">Creative Execution</p>
+      <h2 class="content-heading">What did you make?</h2>
+      <div class="content-body">
+        <p>
+          Describe the final deliverables in detail. What assets did you create? What platforms or formats were involved? How did the visual and verbal identity come together?
+        </p>
+      </div>
+    </section>
+
+    <!-- DUAL IMAGES -->
+    <div class="image-duo">
+      <div class="image-block">Image — Deliverable 1</div>
+      <div class="image-block">Image — Deliverable 2</div>
+    </div>
+
+    <!-- OUTCOMES / RESULTS -->
+    <section class="content-section">
+      <p class="content-label">Outcomes</p>
+      <h2 class="content-heading">What did it achieve?</h2>
+      <div class="content-body">
+        <p>
+          Share results, feedback, or what you learned. If this was a class project, mention the grade, professor feedback, or what you'd do differently. Real metrics are great; thoughtful reflection works too.
+        </p>
+      </div>
+      <!-- Fill in your real numbers, or remove if not applicable -->
+      <div class="outcomes-grid">
+        <div class="outcome-card">
+          <span class="outcome-number">+42%</span>
+          <span class="outcome-label">Engagement Rate</span>
+        </div>
+        <div class="outcome-card">
+          <span class="outcome-number">15K</span>
+          <span class="outcome-label">Impressions</span>
+        </div>
+        <div class="outcome-card">
+          <span class="outcome-number">A</span>
+          <span class="outcome-label">Final Grade</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOLS USED -->
+    <section class="content-section">
+      <p class="content-label">Tools Used</p>
+      <div class="tools-list">
+        <span class="tool-tag">Adobe Photoshop</span>
+        <span class="tool-tag">Adobe Illustrator</span>
+        <span class="tool-tag">Canva</span>
+        <span class="tool-tag">Google Slides</span>
+        <span class="tool-tag">Instagram</span>
+        <!-- Add or remove tags as needed -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- NEXT PROJECT LINK -->
+  <a href="project.html" class="next-project">
+    <div>
+      <p class="next-label">Next Project</p>
+      <p class="next-title">Next Project Title →</p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 <a href="index.html">[Your Name]</a>. All rights reserved.</span>
+    <a href="index.html">← Back Home</a>
+  </footer>
+
+</body>
+</html>

@@ -955,3 +955,16 @@
   display: block;
 }
 
+.project-hero .content-section {
+  margin-top: 4rem;
+}
+
+.project-meta {
+  align-items: stretch;
+}
+
+.project-meta .meta-item {
+  flex: 0 1 auto;
+  min-width: 220px;
+  max-width: 420px;
+}

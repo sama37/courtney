@@ -968,3 +968,48 @@
   min-width: 220px;
   max-width: 420px;
 }
+
+
+.portrait-cover {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+
+.portrait-cover .cover-placeholder {
+  max-width: 520px;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.portrait-cover img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 28px;
+}
+
+.portrait-cover {
+  background: none !important;
+  box-shadow: none !important;
+  min-height: unset !important;
+  padding: 0;
+}
+
+.portrait-cover .cover-placeholder {
+  max-width: 520px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 28px;
+}
+
+.portrait-cover img {
+  width: 100%;
+  display: block;
+  border-radius: 28px;
+}

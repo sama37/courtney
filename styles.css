@@ -1062,34 +1062,42 @@
 .award-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 0;
   background: var(--white);
   border-radius: 1.4rem;
   overflow: hidden;
+  align-items: stretch;
 }
 
+/* Image fills the left half of the card */
 .award-image {
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  min-height: 420px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 1.4rem 0 0 1.4rem;
 }
 
 .award-image img {
   display: block;
   width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 0.8rem;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
 }
 
+/* Text matches existing project cards */
 .award-content {
-  padding: 2.5rem 3rem;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .award-content .card-title {
+  font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
   margin-bottom: 1rem;
 }
 
@@ -1102,13 +1110,14 @@
 
 .award-tool {
   display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 500;
+  align-self: flex-start;
   padding: 0.4rem 1rem;
   border-radius: 2rem;
   background: var(--sky-light);
-  color: var(--sky-deep);
   border: 1px solid var(--sky);
+  color: var(--sky-deep);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .award-news {
@@ -1141,10 +1150,12 @@
   }
 
   .award-image {
-    padding: 1.5rem;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+    border-radius: 1.4rem 1.4rem 0 0;
   }
 
   .award-content {
-    padding: 0 1.5rem 2rem;
+    padding: 1.8rem;
   }
 }

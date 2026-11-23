@@ -1159,3 +1159,24 @@
     padding: 1.8rem;
   }
 }
+
+
+/* Reduce space between Projects and Awards */
+
+#work {
+  padding-bottom: 2rem;
+}
+
+.award-section {
+  padding-top: 2rem;
+}
+
+@media (max-width: 900px) {
+  #work {
+    padding-bottom: 1.5rem;
+  }
+
+  .award-section {
+    padding-top: 1.5rem;
+  }
+}
